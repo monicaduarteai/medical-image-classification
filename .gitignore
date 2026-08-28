@@ -1,0 +1,60 @@
+# ==========================================
+# 1. Dataset & Large Files
+# ==========================================
+# Exclude medical datasets from version control
+data/
+
+# ==========================================
+# 2. Local Web Interface Runtime Files
+# ==========================================
+# Ignore user-uploaded X-rays and generated Grad-CAM heatmaps
+interface/uploads/*
+!interface/uploads/.gitkeep
+
+# ==========================================
+# 3. Python & Environment
+# ==========================================
+# Bytecode and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local conda / virtual environments
+med_ai_env/
+.env
+.venv
+env/
+venv/
+
+# ==========================================
+# 4. Jupyter Notebooks
+# ==========================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# ==========================================
+# 5. Model Weights & Large Checkpoints
+# ==========================================
+# PyTorch model weights (uncomment if managing weights externally or if > 100MB)
+# *.pth
+# *.pt
+
+# ==========================================
+# 6. Operating System & IDE Files
+# ==========================================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code / JetBrains
+.vscode/
+.idea/
