@@ -9,10 +9,10 @@ This project focuses on developing a robust **Computer Vision** system to classi
 The project followed an iterative research path, utilizing weighted Cross-Entropy loss to balance the critical trade-off between patient safety (recall) and system alert fatigue (specificity):
 
 | Model Configuration | Loss Weights (Normal vs Pneumonia) | Overall Accuracy | Pneumonia Recall (Sensitivity) | Missed Cases (False Negatives) | Normal Specificity (False Alarms) |
-| :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **v1 (Baseline Fine-Tuned)** | Unweighted | 84.0% | 99.7% | 1 | 56.8% (FP = 101) |
 | **v2 (Max Recall)** | `[1.0, 3.0]` | 84.0% | 100.0% | 0 | 58.5% (FP = 97) |
-| **v3 (Balanced Attempt)** | `[1.0, 2.0]` | 86.0% | 99.7% |  | 62.0% (FP = 89) |
+| **v3 (Balanced Attempt)** | `[1.0, 2.0]` | 86.0% | 99.7% | 1 | 62.0% (FP = 89) |
 | **v4 (Production Optimal)** | `[1.75, 2.00]` | **87.0%** | **99.2%** | **3** | **65.4% (FP = 81)** |
 
 **Key Breakthrough:** Transitioning from an unweighted baseline to precisely tuned class penalties allowed for direct control over the clinical decision boundary. While `v2` achieved flawless 100% recall (eliminating false negatives entirely), it triggered excessive alert fatigue. Narrowing the penalty ratio in `v4` to `[1.75, 2.00]` optimized this trade-off, securing a nearly 20% reduction in false alarms and the highest overall accuracy (87%), while safely capping missed diagnoses at a clinically acceptable 0.8% (3 out of 390 cases).
