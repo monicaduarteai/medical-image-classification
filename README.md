@@ -10,10 +10,10 @@ The project followed an iterative research path, utilizing weighted Cross-Entrop
 
 | Model Configuration | Loss Weights (Normal vs Pneumonia) | Overall Accuracy | Pneumonia Recall (Sensitivity) | Missed Cases (False Negatives) | Normal Specificity (False Alarms) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **v1 (Baseline Fine-Tuned)** | Unweighted | 84.0% | 99.7% | 1 | 56.8% (FP = 101) |
-| **v2 (Max Recall)** | `[1.0, 3.0]` | 84.0% | 100.0% | 0 | 58.5% (FP = 97) |
-| **v3 (Balanced Attempt)** | `[1.0, 2.0]` | 86.0% | 99.7% | 1 | 62.0% (FP = 89) |
-| **v4 (Production Optimal)** | `[1.75, 2.00]` | **87.0%** | **99.2%** | **3** | **65.4% (FP = 81)** |
+| **v1 (Baseline Fine-Tuned)** | Unweighted | 83.7% | 99.7% | 1 | 56.8% (FP = 101) |
+| **v2 (Max Recall)** | `[1.0, 3.0]` | 84.5% | 100.0% | 0 | 58.5% (FP = 97) |
+| **v3 (Balanced Attempt)** | `[1.0, 2.0]` | 85.6% | 99.7% | 1 | 62.0% (FP = 89) |
+| **v4 (Production Optimal)** | `[1.75, 2.00]` | **86.5%** | **99.2%** | **3** | **65.4% (FP = 81)** |
 
 **Key Breakthrough:** Transitioning from an unweighted baseline to precisely tuned class penalties allowed for direct control over the clinical decision boundary. While `v2` achieved flawless 100% recall (eliminating false negatives entirely), it triggered excessive alert fatigue. Narrowing the penalty ratio in `v4` to `[1.75, 2.00]` optimized this trade-off, securing a nearly 20% reduction in false alarms and the highest overall accuracy (87%), while safely capping missed diagnoses at a clinically acceptable 0.8% (3 out of 390 cases).
 
@@ -41,7 +41,7 @@ The model was fine-tuned to balance high precision with critical patient safety,
 * **Loss Function Weights:** [1.75, 2.00] (Normal vs. Pneumonia)
 * **Classification Accuracy:** 87.0%
 * **Pneumonia Sensitivity (Recall):** 99.2% (FN = 3)
-* **Normal Specificity:** 65.3% (TN = 153, FP = 81)
+* **Normal Specificity:** 65.4% (TN = 153, FP = 81)
 
 ### Safety & Interpretability Logic
 * **≥ 75.0% Confidence:** Direct classification output (`NORMAL` or `PNEUMONIA`).
